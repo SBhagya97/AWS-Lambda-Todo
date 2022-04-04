@@ -2,10 +2,10 @@ const { v4 } = require("uuid")
 const AWS = require("aws-sdk")
 
 const addTodo = async(event) => {
-    const dynamo = new AWS.DynamoDB.DocumentClient();
+    const dynamodb = new AWS.DynamoDB.DocumentClient();
     const { todo } = JSON.parse(event.body);
-    const crteatedAt = new Date();
-    const id = V4();
+    const createdAt = new Date();
+    const id = v4();
 
     console.log("This is an Id", id)
     const newTodo = {
@@ -14,7 +14,7 @@ const addTodo = async(event) => {
         createdAt,
         completed: false,
     }
-    await dynamo.put({
+    await dynamodb.put({
         TableName: "TodoTable",
         Item: newTodo
     }).promise()
